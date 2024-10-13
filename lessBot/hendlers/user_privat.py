@@ -3,14 +3,20 @@ import dict
 from random import choice
 
 from aiogram import Router, types
-from aiogram.filters import CommandStart
+from aiogram.filters import CommandStart, Command
 
 user_private_router = Router()
+
 
 # Хендлер реакции на команду /start
 @user_private_router.message(CommandStart())
 async def start_cmd(message: types.Message):
-    await message.answer(f"Привет {message.from_user.full_name}")
+    await message.answer(f"Привет, {message.from_user.full_name}, я, виртуальный помощник")
+
+# хендлер меню
+@user_private_router.message(Command('menu'))
+async def menu_cmd(message: types.Message):
+    await message.answer("Это меню")
 
 # эхо хендлер
 @user_private_router.message()
