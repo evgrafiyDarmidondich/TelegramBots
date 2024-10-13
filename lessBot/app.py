@@ -31,8 +31,8 @@ async def main():
     # Сбрасывает ожидаеме обновления
     await bot.delete_webhook(drop_pending_updates=True)
     # вызов програмных кнопок меню
+    await bot.set_my_commands(commands=privat, scope=BotCommandScopeAllPrivateChats())
 
-    await bot.delete_my_commands(scope=BotCommandScopeAllPrivateChats())
     await dp.start_polling(bot, allowed_updates=ALLOWED_UPDATES)
 
 # Вызвали функцию запуска бота
