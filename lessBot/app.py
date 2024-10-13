@@ -3,9 +3,13 @@ import os
 
 from dotenv import load_dotenv
 
-from aiogram import Bot, Dispatcher, types
+from aiogram import Bot, Dispatcher
 
 load_dotenv()
+
+from lessBot.hendlers.user_privat import user_private_router
+
+
 TOKEN = os.getenv('TOKEN')
 
 # список разрешоных обновлений
@@ -14,6 +18,8 @@ ALLOWED_UPDATES = ['message', 'edited_message']
 bot = Bot(TOKEN)
 
 dp = Dispatcher()
+# подключение 1-го роутера
+dp.include_router(user_private_router)
 
 
 

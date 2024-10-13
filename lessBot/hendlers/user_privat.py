@@ -3,18 +3,18 @@ import dict
 import types
 from random import choice
 
+from aiogram import Router
 from aiogram.filters import CommandStart
 
-from lessBot.app import dp
-
+user_private_router = Router()
 
 # Хендлер реакции на команду /start
-@dp.message(CommandStart())
+@user_private_router.message(CommandStart())
 async def start_cmd(message: types.Message):
     await message.answer(f"Привет {message.from_user.full_name}")
 
 # эхо хендлер
-@dp.message()
+@user_private_router.message()
 async def echo_handler(message: types.Message):
     try:
         # Перехватываем текст из сообщения
