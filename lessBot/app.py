@@ -2,13 +2,12 @@ import asyncio
 import os
 import dict
 
-from random import choice
-from aiogram import Bot, Dispatcher, types
-from aiogram.filters import CommandStart
-
 from dotenv import load_dotenv
 
+from random import choice
 
+from aiogram import Bot, Dispatcher, types
+from aiogram.filters import CommandStart
 
 load_dotenv()
 TOKEN = os.getenv('TOKEN')
