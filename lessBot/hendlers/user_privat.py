@@ -18,6 +18,21 @@ async def start_cmd(message: types.Message):
 async def menu_cmd(message: types.Message):
     await message.answer("Это меню")
 
+# хендлер  абоут
+@user_private_router.message(Command('about'))
+async def menu_cmd(message: types.Message):
+    await message.answer("Это про нас")
+
+# хендлер  оплаты
+@user_private_router.message(Command('payment'))
+async def menu_cmd(message: types.Message):
+    await message.answer("Это про оплату")
+
+# хендлер  доставки
+@user_private_router.message(Command('shiping'))
+async def menu_cmd(message: types.Message):
+    await message.answer("Это про доставку")
+
 # эхо хендлер
 @user_private_router.message()
 async def echo_handler(message: types.Message):
