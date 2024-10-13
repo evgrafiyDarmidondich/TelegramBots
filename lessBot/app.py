@@ -1,7 +1,9 @@
 import asyncio
 import os
+import dict
 
-from aiogram import Bot, Dispatcher, types, html
+from random import choice
+from aiogram import Bot, Dispatcher, types
 from aiogram.filters import CommandStart
 
 from dotenv import load_dotenv
@@ -25,9 +27,15 @@ async def start_cmd(message: types.Message):
 async def echo_handler(message: types.Message):
     try:
         # Перехватываем текст из сообщения
-        await message.answer(message.text)
+        text: str | None = message.text
+        text = text.lower()
+        if text in dict.greeting:
+            # отвечаем на приветствие из списка, приветствием из того же списка
+            await message.answer(choice(dict.greeting))
+        elif text in dict.parting:
+            await message.answer(choice(dict.parting))
     except:
-        await message.answer(f'Хорошая попытка {message}')
+        await message.answer(f'Хорошая попытка {message.text}')
 
 
 
