@@ -41,6 +41,9 @@ async def echo_handler(message: types.Message):
 
 # функция запуска бота
 async def main():
+    # Сбрасывает ожидаеме обновления
+    await bot.delete_webhook(drop_pending_updates=True)
+
     await dp.start_polling(bot)
 
 # Вызвали функцию запуска бота
