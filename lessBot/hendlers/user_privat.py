@@ -1,9 +1,8 @@
 import dict
 
-import types
 from random import choice
 
-from aiogram import Router
+from aiogram import Router, types
 from aiogram.filters import CommandStart
 
 user_private_router = Router()
