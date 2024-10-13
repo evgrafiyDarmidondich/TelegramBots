@@ -29,7 +29,7 @@ async def menu_cmd(message: types.Message):
     await message.answer("Это про оплату")
 
 # хендлер  доставки
-@user_private_router.message(Command('shiping'))
+@user_private_router.message(Command('shipping'))
 async def menu_cmd(message: types.Message):
     await message.answer("Это про доставку")
 

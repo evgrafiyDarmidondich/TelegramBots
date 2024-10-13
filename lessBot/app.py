@@ -1,9 +1,12 @@
 import asyncio
 import os
 
+from aiogram.types import BotCommandScopeAllPrivateChats
 from dotenv import load_dotenv
 
 from aiogram import Bot, Dispatcher
+
+from lessBot.common.bot_cmds_list import privat
 
 load_dotenv()
 
@@ -27,7 +30,8 @@ dp.include_router(user_private_router)
 async def main():
     # Сбрасывает ожидаеме обновления
     await bot.delete_webhook(drop_pending_updates=True)
-
+    # вызов програмных кнопок меню
+    await bot.set_my_commands(commands=privat, scope=BotCommandScopeAllPrivateChats())
     await dp.start_polling(bot, allowed_updates=ALLOWED_UPDATES)
 
 # Вызвали функцию запуска бота
