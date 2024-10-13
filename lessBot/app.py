@@ -33,6 +33,8 @@ async def echo_handler(message: types.Message):
             await message.answer(choice(dict.greeting))
         elif text in dict.parting:
             await message.answer(choice(dict.parting))
+        else:
+            await message.answer('Я пока не понимаю того чего ты написал')
     except:
         await message.answer(f'Хорошая попытка {message.text}')
 
