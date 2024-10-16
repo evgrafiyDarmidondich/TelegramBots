@@ -2,7 +2,7 @@ import dict
 
 from random import choice
 
-from aiogram import Router, types
+from aiogram import Router, types, F
 from aiogram.filters import CommandStart, Command
 
 user_private_router = Router()
@@ -32,6 +32,11 @@ async def menu_cmd(message: types.Message):
 @user_private_router.message(Command('shipping'))
 async def menu_cmd(message: types.Message):
     await message.answer("Это про доставку")
+
+# Магический фильтр
+@user_private_router.message(F.text)
+async def menu_cmd(message: types.Message):
+    await message.answer("Это магический фильтр")
 
 # эхо хендлер
 @user_private_router.message()
