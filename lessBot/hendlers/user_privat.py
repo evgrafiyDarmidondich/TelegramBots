@@ -33,13 +33,8 @@ async def menu_cmd(message: types.Message):
 async def menu_cmd(message: types.Message):
     await message.answer("Это про доставку")
 
-# Магический фильтр
+# хендлер приветствия
 @user_private_router.message(F.text)
-async def menu_cmd(message: types.Message):
-    await message.answer("Это магический фильтр")
-
-# эхо хендлер
-@user_private_router.message()
 async def echo_handler(message: types.Message):
     try:
         # Перехватываем текст из сообщения
