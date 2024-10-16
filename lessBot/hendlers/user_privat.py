@@ -35,7 +35,7 @@ async def menu_cmd(message: types.Message):
 
 # хендлер приветствия
 @user_private_router.message(F.text)
-async def echo_handler(message: types.Message):
+async def greeting_handler(message: types.Message):
     try:
         # Перехватываем текст из сообщения
         text: str | None = message.text
@@ -49,3 +49,8 @@ async def echo_handler(message: types.Message):
             await message.answer('Я пока не понимаю того чего ты написал')
     except:
         await message.answer(f'Хорошая попытка {message.text}')
+
+# Хендлер обработки фото с магическим фильтром
+@user_private_router.message(F.image)
+async def foto_hendler(message: types.Message):
+    await message.answer('Это фото')
