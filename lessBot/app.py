@@ -7,6 +7,7 @@ from dotenv import load_dotenv
 from aiogram import Bot, Dispatcher
 
 from lessBot.common.bot_cmds_list import privat
+from lessBot.hendlers.user_group import user_group_router
 
 load_dotenv()
 
@@ -23,6 +24,7 @@ bot = Bot(TOKEN)
 dp = Dispatcher()
 # подключение 1-го роутера
 dp.include_router(user_private_router)
+dp.include_router(user_group_router)
 
 
 
