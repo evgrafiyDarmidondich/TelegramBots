@@ -51,6 +51,6 @@ async def greeting_handler(message: types.Message):
         await message.answer(f'Хорошая попытка {message.text}')
 
 # Хендлер обработки фото с магическим фильтром
-@user_private_router.message(F.image)
-async def foto_hendler(message: types.Message):
+@user_private_router.message(F.photo)
+async def foto_handler(message: types.Message):
     await message.answer('Это фото')
