@@ -33,6 +33,19 @@ async def menu_cmd(message: types.Message):
 async def menu_cmd(message: types.Message):
     await message.answer("Это про доставку")
 
+
+# Хендлер обработки фото с магическим фильтром
+@user_private_router.message(F.photo)
+async def foto_handler(message: types.Message):
+    await message.answer('Это фото')
+
+# Хендлер обработки текста с магическим фильтром контекста
+@user_private_router.message(F.text.lower().contains('варианты доставки') |
+                             F.text.lower().contains('доста'))
+async def foto_handler(message: types.Message):
+    await message.answer('Это магический фильтр 2')
+
+
 # хендлер приветствия
 @user_private_router.message(F.text)
 async def greeting_handler(message: types.Message):
@@ -49,8 +62,3 @@ async def greeting_handler(message: types.Message):
             await message.answer('Я пока не понимаю того чего ты написал')
     except:
         await message.answer(f'Хорошая попытка {message.text}')
-
-# Хендлер обработки фото с магическим фильтром
-@user_private_router.message(F.photo)
-async def foto_handler(message: types.Message):
-    await message.answer('Это фото')
