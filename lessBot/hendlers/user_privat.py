@@ -14,6 +14,7 @@ async def start_cmd(message: types.Message):
     await message.answer(f"Привет, {message.from_user.full_name}, я, виртуальный помощник")
 
 # хендлер меню
+@user_private_router.message(F.text.lower().contains('меню'))
 @user_private_router.message(Command('menu'))
 async def menu_cmd(message: types.Message):
     await message.answer("Это меню")
@@ -24,11 +25,15 @@ async def menu_cmd(message: types.Message):
     await message.answer("Это про нас")
 
 # хендлер  оплаты
+@user_private_router.message(F.text.lower().contains('как заплатить') |
+                             F.text.lower().contains('оплат'))
 @user_private_router.message(Command('payment'))
 async def menu_cmd(message: types.Message):
     await message.answer("Это про оплату")
 
 # хендлер  доставки
+@user_private_router.message(F.text.lower().contains('варианты доставки') |
+                             F.text.lower().contains('доста'))
 @user_private_router.message(Command('shipping'))
 async def menu_cmd(message: types.Message):
     await message.answer("Это про доставку")
@@ -38,12 +43,6 @@ async def menu_cmd(message: types.Message):
 @user_private_router.message(F.photo)
 async def foto_handler(message: types.Message):
     await message.answer('Это фото')
-
-# Хендлер обработки текста с магическим фильтром контекста
-@user_private_router.message(F.text.lower().contains('варианты доставки') |
-                             F.text.lower().contains('доста'))
-async def foto_handler(message: types.Message):
-    await message.answer('Это магический фильтр 2')
 
 
 # хендлер приветствия
