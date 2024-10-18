@@ -3,13 +3,12 @@ from string import punctuation
 
 from aiogram import Router, types
 
-user_group_router = Router()
+from lessBot.dict import restricted_words
+from lessBot.filters.chat_types import ChatTypesFilters
 
-restricted_words = {
-    'кабан',
-    'хомяк',
-    'выхухоль',
-}
+user_group_router = Router()
+user_group_router.message.filter(ChatTypesFilters(["group"]))
+
 
 def clean_text(text: str):
     return text.translate(str.maketrans('', '', punctuation))

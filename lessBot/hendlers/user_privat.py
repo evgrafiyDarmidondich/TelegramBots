@@ -1,3 +1,5 @@
+from string import punctuation
+
 import dict
 
 from random import choice
@@ -5,8 +7,12 @@ from random import choice
 from aiogram import Router, types, F
 from aiogram.filters import CommandStart, Command, or_f
 
-user_private_router = Router()
+from lessBot.common.bot_cmds_list import privat
+from lessBot.dict import restricted_words
+from lessBot.filters.chat_types import ChatTypesFilters
 
+user_private_router = Router()
+user_private_router.message.filter(ChatTypesFilters(['private']))
 
 # Хендлер реакции на команду /start
 @user_private_router.message(CommandStart())
@@ -43,6 +49,8 @@ async def menu_cmd(message: types.Message):
 async def foto_handler(message: types.Message):
     await message.answer('Это фото')
 
+def clean_text(text: str):
+    return text.translate(str.maketrans('', '', punctuation))
 
 # хендлер приветствия
 @user_private_router.message(F.text)
@@ -56,6 +64,9 @@ async def greeting_handler(message: types.Message):
             await message.answer(choice(dict.greeting))
         elif text in dict.parting:
             await message.answer(choice(dict.parting))
+        # цензура
+        elif restricted_words.intersection(message.text.lower().split()):
+            await message.delete()
         else:
             await message.answer('Я пока не понимаю того чего ты написал')
     except:
