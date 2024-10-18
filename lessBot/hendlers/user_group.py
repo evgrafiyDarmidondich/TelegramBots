@@ -7,7 +7,7 @@ from lessBot.dict import restricted_words
 from lessBot.filters.chat_types import ChatTypesFilters
 
 user_group_router = Router()
-user_group_router.message.filter(ChatTypesFilters(["group"]))
+user_group_router.message.filter(ChatTypesFilters(["group", 'supergroup']))
 
 
 def clean_text(text: str):
