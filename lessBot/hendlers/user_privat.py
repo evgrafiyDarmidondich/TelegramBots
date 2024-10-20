@@ -47,7 +47,7 @@ async def menu_cmd(message: types.Message):
                              F.text.lower().contains('доста'))
 @user_private_router.message(Command('shipping'))
 async def menu_cmd(message: types.Message):
-    await message.answer("<i><b>Это про доставку</b></i>", parse_mode=ParseMode.HTML, reply_markup=reply.del_kbd)
+    await message.answer("<i><b>Это про доставку</b></i>", reply_markup=reply.del_kbd)
 
 # хендлер обработки кнопки "Оставить отзыв"
 @user_private_router.message(F.text.lower().contains('Оставить отзыв') |

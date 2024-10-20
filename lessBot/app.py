@@ -1,6 +1,7 @@
 import asyncio
 import os
 
+from aiogram.enums import ParseMode
 from aiogram.types import BotCommandScopeAllPrivateChats
 from dotenv import load_dotenv
 
@@ -19,7 +20,7 @@ TOKEN = os.getenv('TOKEN')
 # список разрешоных обновлений
 ALLOWED_UPDATES = ['message', 'edited_message']
 
-bot = Bot(TOKEN)
+bot = Bot(TOKEN, parse_mode=ParseMode.HTML)
 
 dp = Dispatcher()
 # подключение 1-го роутера
