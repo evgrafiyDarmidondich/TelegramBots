@@ -6,6 +6,7 @@ from random import choice
 
 from aiogram import Router, types, F
 from aiogram.filters import CommandStart, Command, or_f
+from aiogram.types import Message
 
 from lessBot.common.bot_cmds_list import privat
 from lessBot.dict import restricted_words
@@ -55,6 +56,15 @@ async def foto_handler(message: types.Message):
 
 def clean_text(text: str):
     return text.translate(str.maketrans('', '', punctuation))
+
+# Хендлеры обработки кнопок запросов Контакта и локации
+@user_private_router.message(F.contact)
+async def get_contact(message: Message):
+    await message.answer(f"Контакт получен \n{message.contact}")
+
+@user_private_router.message(F.location)
+async def get_location(message: Message):
+    await message.answer(f"Местоположение получено \n{message.location}")
 
 # хендлер приветствия
 @user_private_router.message(F.text)
