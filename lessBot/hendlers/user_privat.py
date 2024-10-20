@@ -5,7 +5,7 @@ import dict
 from random import choice
 
 from aiogram import Router, types, F
-from aiogram.enums import ParseMode
+from aiogram.utils.formatting import as_list, as_marked_section, Bold
 from aiogram.filters import CommandStart, Command, or_f
 from aiogram.types import Message
 
@@ -32,22 +32,22 @@ async def menu_cmd(message: types.Message):
 
 # хендлер  абоут
 @user_private_router.message(or_f(Command('about'), F.text.lower().contains('о магазине')))
-async def menu_cmd(message: types.Message):
+async def about_cmd(message: types.Message):
     await message.answer("Это про нас", reply_markup=reply.del_kbd)
 
 # хендлер  оплаты
 @user_private_router.message(F.text.lower().contains('как заплатить') |
                              F.text.lower().contains('оплат'))
 @user_private_router.message(Command('payment'))
-async def menu_cmd(message: types.Message):
+async def payment_cmd(message: types.Message):
     await message.answer("Это про оплату", reply_markup=reply.del_kbd)
 
 # хендлер  доставки
 @user_private_router.message(F.text.lower().contains('варианты доставки') |
                              F.text.lower().contains('доста'))
 @user_private_router.message(Command('shipping'))
-async def menu_cmd(message: types.Message):
-    await message.answer("<i><b>Это про доставку</b></i>", reply_markup=reply.del_kbd)
+async def shipping_cmd(message: types.Message):
+    await message.answer("<i><b>Это про доставку!!!</b></i>", reply_markup=reply.del_kbd)
 
 # хендлер обработки кнопки "Оставить отзыв"
 @user_private_router.message(F.text.lower().contains('Оставить отзыв') |
