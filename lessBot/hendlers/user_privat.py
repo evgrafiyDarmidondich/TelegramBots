@@ -5,6 +5,7 @@ import dict
 from random import choice
 
 from aiogram import Router, types, F
+from aiogram.enums import ParseMode
 from aiogram.filters import CommandStart, Command, or_f
 from aiogram.types import Message
 
@@ -46,7 +47,7 @@ async def menu_cmd(message: types.Message):
                              F.text.lower().contains('доста'))
 @user_private_router.message(Command('shipping'))
 async def menu_cmd(message: types.Message):
-    await message.answer("Это про доставку", reply_markup=reply.del_kbd)
+    await message.answer("<i><b>Это про доставку</b></i>", parse_mode=ParseMode.HTML, reply_markup=reply.del_kbd)
 
 # хендлер обработки кнопки "Оставить отзыв"
 @user_private_router.message(F.text.lower().contains('Оставить отзыв') |
