@@ -9,5 +9,6 @@ start_cb = ReplyKeyboardMarkup(
         KeyboardButton(text="Варианты оплаты"),
         ]
     ],
-    resize_keyboard=True
+    resize_keyboard=True,
+    input_field_placeholder='Что вас интересует?'
 )
