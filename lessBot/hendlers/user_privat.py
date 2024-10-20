@@ -48,6 +48,12 @@ async def menu_cmd(message: types.Message):
 async def menu_cmd(message: types.Message):
     await message.answer("Это про доставку", reply_markup=reply.del_kbd)
 
+# хендлер обработки кнопки "Оставить отзыв"
+@user_private_router.message(F.text.lower().contains('Оставить отзыв') |
+                             F.text.lower().contains('отзы'))
+async def get_fedback(message: Message):
+    await message.answer("Отправте контакты и локацию", reply_markup=reply.test_cb)
+
 
 # Хендлер обработки фото с магическим фильтром
 @user_private_router.message(F.photo)
@@ -60,11 +66,13 @@ def clean_text(text: str):
 # Хендлеры обработки кнопок запросов Контакта и локации
 @user_private_router.message(F.contact)
 async def get_contact(message: Message):
-    await message.answer(f"Контакт получен \n{message.contact}")
+    await message.answer(f"Контакт получен \n{message.contact.first_name}\n"
+                         f"☎️ {message.contact.phone_number}")
 
 @user_private_router.message(F.location)
 async def get_location(message: Message):
-    await message.answer(f"Местоположение получено \n{message.location}")
+    await message.answer(f"Местоположение получено \nдолгота:{message.location.longitude}\nширота:"
+                         f"{message.location.latitude}")
 
 # хендлер приветствия
 @user_private_router.message(F.text)

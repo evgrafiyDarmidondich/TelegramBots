@@ -46,4 +46,5 @@ test_cb = ReplyKeyboardMarkup(
             KeyboardButton(text="Отправить локацию 🧭", request_location=True)
         ],
     ],
+    resize_keyboard=True
 )
