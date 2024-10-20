@@ -9,7 +9,6 @@ from aiogram.utils.formatting import as_list, as_marked_section, Bold
 from aiogram.filters import CommandStart, Command, or_f
 from aiogram.types import Message
 
-from lessBot.common.bot_cmds_list import privat
 from lessBot.dict import restricted_words
 from lessBot.filters.chat_types import ChatTypesFilters
 from lessBot.kbds import reply
@@ -40,14 +39,39 @@ async def about_cmd(message: types.Message):
                              F.text.lower().contains('оплат'))
 @user_private_router.message(Command('payment'))
 async def payment_cmd(message: types.Message):
-    await message.answer("Это про оплату", reply_markup=reply.del_kbd)
+
+    text = as_marked_section(
+        Bold("Варианты оплаты:\n"),
+        "Картой в боте\n",
+        "При получение карта/кэш\n",
+        "В заведении",
+        marker="✅ "
+    )
+
+    await message.answer(text.as_html(), reply_markup=reply.del_kbd)
 
 # хендлер  доставки
 @user_private_router.message(F.text.lower().contains('варианты доставки') |
                              F.text.lower().contains('доста'))
 @user_private_router.message(Command('shipping'))
 async def shipping_cmd(message: types.Message):
-    await message.answer("<i><b>Это про доставку!!!</b></i>", reply_markup=reply.del_kbd)
+
+    text = as_list(as_marked_section(
+        Bold("Варианты доставки:\n"),
+        "Курьер\n",
+        "Самовывоз(Сейчас приду заберу)\n",
+        "Покушаю у вас (Сейчас прибегу)",
+        marker="✅ "
+    ),
+    as_marked_section(
+        Bold("Нельзя:\n"),
+        "📯 Почта\n",
+        "🕊 Голуби",
+        marker="❌ "
+    ),
+    sep = "\n-----------------\n")
+
+    await message.answer(text.as_html(), reply_markup=reply.del_kbd)
 
 # хендлер обработки кнопки "Оставить отзыв"
 @user_private_router.message(F.text.lower().contains('Оставить отзыв') |
