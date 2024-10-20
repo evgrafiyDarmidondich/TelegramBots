@@ -19,7 +19,8 @@ user_private_router.message.filter(ChatTypesFilters(['private']))
 @user_private_router.message(CommandStart())
 async def start_cmd(message: types.Message):
     await message.answer(f"Привет, {message.from_user.full_name}, я, виртуальный помощник",
-                         reply_markup=reply.start_cb)
+                         reply_markup=reply.start_cb2.as_markup(resize_keyboard=True,
+                                                                input_field_placeholder="Что вас интересует??"))
 
 # хендлер меню
 @user_private_router.message(or_f(Command('menu'),F.text.lower().contains('меню')))
