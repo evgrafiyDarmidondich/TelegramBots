@@ -8,5 +8,6 @@ start_cb = ReplyKeyboardMarkup(
         KeyboardButton(text="Варианты доставки"),
         KeyboardButton(text="Варианты оплаты"),
         ]
-    ]
+    ],
+    resize_keyboard=True
 )

@@ -10,6 +10,7 @@ from aiogram.filters import CommandStart, Command, or_f
 from lessBot.common.bot_cmds_list import privat
 from lessBot.dict import restricted_words
 from lessBot.filters.chat_types import ChatTypesFilters
+from lessBot.kbds import reply
 
 user_private_router = Router()
 user_private_router.message.filter(ChatTypesFilters(['private']))
@@ -17,7 +18,8 @@ user_private_router.message.filter(ChatTypesFilters(['private']))
 # Хендлер реакции на команду /start
 @user_private_router.message(CommandStart())
 async def start_cmd(message: types.Message):
-    await message.answer(f"Привет, {message.from_user.full_name}, я, виртуальный помощник")
+    await message.answer(f"Привет, {message.from_user.full_name}, я, виртуальный помощник",
+                         reply_markup=reply.start_cb)
 
 # хендлер меню
 @user_private_router.message(or_f(Command('menu'),F.text.lower().contains('меню')))
@@ -25,7 +27,7 @@ async def menu_cmd(message: types.Message):
     await message.answer("Это меню")
 
 # хендлер  абоут
-@user_private_router.message(Command('about'))
+@user_private_router.message(or_f(Command('about'), F.text.lower().contains('о магазине')))
 async def menu_cmd(message: types.Message):
     await message.answer("Это про нас")
 
