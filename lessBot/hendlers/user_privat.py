@@ -24,26 +24,26 @@ async def start_cmd(message: types.Message):
 # хендлер меню
 @user_private_router.message(or_f(Command('menu'),F.text.lower().contains('меню')))
 async def menu_cmd(message: types.Message):
-    await message.answer("Это меню")
+    await message.answer("Это меню", reply_markup=reply.del_kbd)
 
 # хендлер  абоут
 @user_private_router.message(or_f(Command('about'), F.text.lower().contains('о магазине')))
 async def menu_cmd(message: types.Message):
-    await message.answer("Это про нас")
+    await message.answer("Это про нас", reply_markup=reply.del_kbd)
 
 # хендлер  оплаты
 @user_private_router.message(F.text.lower().contains('как заплатить') |
                              F.text.lower().contains('оплат'))
 @user_private_router.message(Command('payment'))
 async def menu_cmd(message: types.Message):
-    await message.answer("Это про оплату")
+    await message.answer("Это про оплату", reply_markup=reply.del_kbd)
 
 # хендлер  доставки
 @user_private_router.message(F.text.lower().contains('варианты доставки') |
                              F.text.lower().contains('доста'))
 @user_private_router.message(Command('shipping'))
 async def menu_cmd(message: types.Message):
-    await message.answer("Это про доставку")
+    await message.answer("Это про доставку", reply_markup=reply.del_kbd)
 
 
 # Хендлер обработки фото с магическим фильтром
