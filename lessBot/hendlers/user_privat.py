@@ -1,7 +1,5 @@
 from string import punctuation
 
-import dict
-
 from random import choice
 
 from aiogram import Router, types, F
@@ -104,7 +102,7 @@ async def get_location(message: Message):
 async def greeting_handler(message: types.Message):
     try:
         # Перехватываем текст из сообщения
-        text: str | None = message.text
+        text = message.text
         text = text.lower()
         if text in dict.greeting:
             # отвечаем на приветствие из списка, приветствием из того же списка
