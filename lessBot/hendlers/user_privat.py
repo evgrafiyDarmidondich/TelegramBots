@@ -11,6 +11,7 @@ from aiogram.types import Message
 from lessBot.dicts import restricted_words, greeting, parting
 from lessBot.filters.chat_types import ChatTypesFilters
 from lessBot.kbds import reply
+from lessBot.kbds.reply import get_keyboard
 
 user_private_router = Router()
 user_private_router.message.filter(ChatTypesFilters(['private']))
@@ -20,8 +21,14 @@ user_private_router.message.filter(ChatTypesFilters(['private']))
 async def start_cmd(message: types.Message):
     await message.answer(f"Привет, {message.from_user.full_name}, я, виртуальный помощник",
                          # При создании клавиатуры вторым способом свойства пишутся так!!!!
-                         reply_markup=reply.start_cb3.as_markup(resize_keyboard=True,
-                                                                input_field_placeholder="Что вас интересует??"))
+                         reply_markup=get_keyboard(
+                             "Меню",
+                             "О магазине",
+                             "Варианты оплаты",
+                             "Варианты доставки",
+                             placeholder="Что вас интересует?",
+                             sizes=(2, 2)
+                         ))
 
 # хендлер меню
 @user_private_router.message(or_f(Command('menu'),F.text.lower().contains('меню')))
