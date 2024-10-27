@@ -4,6 +4,7 @@ import os
 from aiogram.client.default import DefaultBotProperties
 
 from aiogram.enums import ParseMode
+from aiogram.fsm.strategy import FSMStrategy
 from aiogram.types import BotCommandScopeAllPrivateChats
 from dotenv import load_dotenv
 
@@ -29,10 +30,11 @@ bot.my_admins_list = []
 
 
 dp = Dispatcher()
-# подключение 1-го роутера
+# подключение роутера
+dp.include_router(admin_router)
 dp.include_router(user_private_router)
 dp.include_router(user_group_router)
-dp.include_router(admin_router)
+
 
 
 
