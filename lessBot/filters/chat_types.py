@@ -1,5 +1,6 @@
 from aiogram.filters import Filter
-from aiogram import types
+from aiogram import types, Bot
+
 
 # Класс фильтра типов чата
 class ChatTypesFilters(Filter):
@@ -8,3 +9,11 @@ class ChatTypesFilters(Filter):
 
     async def __call__(self, message: types.Message):
         return message.chat.type in self.chat_types
+
+
+class IsAdmin:
+    def __init__(self) -> None:
+        pass
+
+    async def __call__(self, message: types.Message, bot: Bot) -> bool:
+        return message.from_user.id in bot.my_admins_list
