@@ -4,7 +4,6 @@ import os
 from aiogram.client.default import DefaultBotProperties
 
 from aiogram.enums import ParseMode
-from aiogram.fsm.strategy import FSMStrategy
 from aiogram.types import BotCommandScopeAllPrivateChats
 from dotenv import load_dotenv
 
