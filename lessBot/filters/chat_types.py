@@ -11,7 +11,7 @@ class ChatTypesFilters(Filter):
         return message.chat.type in self.chat_types
 
 
-class IsAdmin:
+class IsAdmin(Filter):
     def __init__(self):
         pass
 

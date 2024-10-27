@@ -23,6 +23,9 @@ async def get_admins(message: Message, bot: Bot):
     bot.my_admins_list = admins_list
     if message.from_user.id in admins_list:
         await message.delete()
+    else:
+        pass
+    print(admins_list)
 
 
 def clean_text(text: str):
