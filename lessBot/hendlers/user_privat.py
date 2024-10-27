@@ -7,7 +7,8 @@ from aiogram.utils.formatting import as_list, as_marked_section, Bold
 from aiogram.filters import CommandStart, Command, or_f
 from aiogram.types import Message
 
-from lessBot.dict import restricted_words
+# from lessBot import dicts
+from lessBot.dicts import restricted_words, greeting, parting
 from lessBot.filters.chat_types import ChatTypesFilters
 from lessBot.kbds import reply
 
@@ -104,11 +105,11 @@ async def greeting_handler(message: types.Message):
         # Перехватываем текст из сообщения
         text = message.text
         text = text.lower()
-        if text in dict.greeting:
+        if text in greeting:
             # отвечаем на приветствие из списка, приветствием из того же списка
-            await message.answer(choice(dict.greeting))
-        elif text in dict.parting:
-            await message.answer(choice(dict.parting))
+            await message.answer(choice(greeting))
+        elif text in parting:
+            await message.answer(choice(parting))
         # цензура
         elif restricted_words.intersection(message.text.lower().split()):
             await message.delete()

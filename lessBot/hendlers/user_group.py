@@ -3,7 +3,7 @@ from string import punctuation
 
 from aiogram import Router, types
 
-from lessBot.dict import restricted_words
+from lessBot.dicts import restricted_words
 from lessBot.filters.chat_types import ChatTypesFilters
 
 user_group_router = Router()
