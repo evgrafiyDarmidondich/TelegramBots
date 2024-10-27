@@ -1,4 +1,3 @@
-from enum import member
 from string import punctuation
 
 from aiogram import Router, types, Bot

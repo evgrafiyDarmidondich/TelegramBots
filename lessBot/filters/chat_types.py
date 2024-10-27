@@ -12,8 +12,8 @@ class ChatTypesFilters(Filter):
 
 
 class IsAdmin:
-    def __init__(self) -> None:
+    def __init__(self):
         pass
 
-    async def __call__(self, message: types.Message, bot: Bot) -> bool:
+    async def __call__(self, message: types.Message, bot: Bot):
         return message.from_user.id in bot.my_admins_list
