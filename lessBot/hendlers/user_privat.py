@@ -1,3 +1,4 @@
+from random import choice
 from string import punctuation
 
 from aiogram import Router, types, F
@@ -5,6 +6,7 @@ from aiogram.utils.formatting import as_list, as_marked_section, Bold
 from aiogram.filters import CommandStart, Command, or_f
 from aiogram.types import Message
 
+from lessBot.dicts import greeting, parting, restricted_words
 from lessBot.filters.chat_types import ChatTypesFilters
 from lessBot.kbds import reply
 from lessBot.kbds.reply import get_keyboard
@@ -100,3 +102,23 @@ async def get_location(message: Message):
     await message.answer(f"Местоположение получено \nдолгота:{message.location.longitude}\nширота:"
                          f"{message.location.latitude}")
 
+
+# хендлер приветствия
+@user_private_router.message(F.text)
+async def greeting_handler(message: types.Message):
+    try:
+        # Перехватываем текст из сообщения
+        text = message.text
+        text = text.lower()
+        if text in greeting:
+            # отвечаем на приветствие из списка, приветствием из того же списка
+            await message.answer(choice(greeting))
+        elif text in parting:
+            await message.answer(choice(parting))
+        # цензура
+        elif restricted_words.intersection(message.text.lower().split()):
+            await message.delete()
+        else:
+            await message.answer('Я пока не понимаю того чего ты написал')
+    except:
+        await message.answer(f'Хорошая попытка {message.text}')
