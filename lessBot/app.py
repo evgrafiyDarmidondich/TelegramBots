@@ -23,6 +23,9 @@ TOKEN = os.getenv('TOKEN')
 ALLOWED_UPDATES = ['message', 'edited_message']
 
 bot = Bot(TOKEN, default=DefaultBotProperties(parse_mode=ParseMode.HTML))
+bot.my_admins_list = []
+
+
 
 dp = Dispatcher()
 # подключение 1-го роутера
