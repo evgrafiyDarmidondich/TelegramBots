@@ -10,6 +10,7 @@ from dotenv import load_dotenv
 from aiogram import Bot, Dispatcher
 
 from lessBot.common.bot_cmds_list import privat
+from lessBot.database.engine import create_db
 from lessBot.hendlers.admin_privat import admin_router
 from lessBot.hendlers.user_group import user_group_router
 
@@ -39,6 +40,8 @@ dp.include_router(user_group_router)
 
 # функция запуска бота
 async def main():
+    # Запуск создания базы данных
+    await create_db()
     # Сбрасывает ожидаеме обновления
     await bot.delete_webhook(drop_pending_updates=True)
     # вызов програмных кнопок меню
