@@ -10,9 +10,10 @@ from dotenv import load_dotenv
 from aiogram import Bot, Dispatcher
 
 from lessBot.common.bot_cmds_list import privat
-from lessBot.database.engine import create_db, drop_db
+from lessBot.database.engine import create_db, drop_db, session_maker
 from lessBot.hendlers.admin_privat import admin_router
 from lessBot.hendlers.user_group import user_group_router
+from lessBot.middlewares.db import DataBaseSession
 
 load_dotenv()
 
@@ -51,6 +52,8 @@ async def on_shutdown(bot):
 async def main():
     dp.startup.register(on_startup)
     dp.shutdown.register(on_shutdown)
+
+    dp.update.middleware(DataBaseSession(session_poll=session_maker))
 
     # Запуск создания базы данных
     await create_db()
