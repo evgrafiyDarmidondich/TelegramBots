@@ -30,17 +30,17 @@ async def add_product(message: types.Message):
 
 @admin_router.message(F.text == "Я так, просто посмотреть зашел")
 async def starring_at_product(message: types.Message):
-    await message.answer("ОК, вот список товаров")
+    await message.answer("ОК, вот список товаров ⏫️")
 
 
 @admin_router.message(F.text == "Изменить товар")
 async def change_product(message: types.Message):
-    await message.answer("ОК, вот список товаров")
+    await message.answer("ОК, вот список товаров ⏫️")
 
 
 @admin_router.message(F.text == "Удалить товар")
 async def delete_product(message: types.Message):
-    await message.answer("Выберите товар(ы) для удаления")
+    await message.answer("Выберите товар(ы) для удаления ⏫️")
 
 
 #Код ниже для машины состояний (FSM)
