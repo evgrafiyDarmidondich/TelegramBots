@@ -5,7 +5,9 @@ from aiogram import Router, types, F
 from aiogram.utils.formatting import as_list, as_marked_section, Bold
 from aiogram.filters import CommandStart, Command, or_f
 from aiogram.types import Message
+from sqlalchemy.ext.asyncio import AsyncSession
 
+from lessBot.database.orm_query import orm_get_products
 from lessBot.dicts import greeting, parting, restricted_words
 from lessBot.filters.chat_types import ChatTypesFilters
 from lessBot.kbds import reply
@@ -29,7 +31,14 @@ async def start_cmd(message: types.Message):
 
 # хендлер меню
 @user_private_router.message(or_f(Command('menu'),F.text.lower().contains('меню')))
-async def menu_cmd(message: types.Message):
+async def menu_cmd(message: types.Message, session: AsyncSession):
+    for product in await orm_get_products(session):
+        await message.answer_photo(
+            product.image,
+            caption=f"<strong>{product.name}</strong>"
+                    f"\n{product.description}\nСтоимость: {round(product.price, 2)}"
+
+        )
     await message.answer("Это меню", reply_markup=reply.del_kbd)
 
 # хендлер  абоут
