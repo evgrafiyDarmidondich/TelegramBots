@@ -23,7 +23,7 @@ from lessBot.hendlers.user_privat import user_private_router
 TOKEN = os.getenv('TOKEN')
 
 # список разрешоных обновлений
-ALLOWED_UPDATES = ['message', 'edited_message', 'callback_query']
+# ALLOWED_UPDATES = ['message', 'edited_message', 'callback_query']
 
 bot = Bot(TOKEN, default=DefaultBotProperties(parse_mode=ParseMode.HTML))
 bot.my_admins_list = []
