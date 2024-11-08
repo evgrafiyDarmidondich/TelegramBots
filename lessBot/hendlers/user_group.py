@@ -25,7 +25,6 @@ async def get_admins(message: Message, bot: Bot):
         await message.delete()
     else:
         pass
-    print(admins_list)
 
 
 def clean_text(text: str):
