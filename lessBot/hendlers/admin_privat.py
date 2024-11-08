@@ -135,12 +135,17 @@ async def add_price(message: types.Message, state: FSMContext):
 async def add_image(message: types.Message, state: FSMContext, session: AsyncSession):
 
     await state.update_data(image=message.photo[-1].file_id)
-    await message.answer("Товар добавлен", reply_markup=ADMIN_KB)
     data = await state.get_data()
+    try:
+        await orm_add_product(session=session, data=data)
+        await message.answer("Товар добавлен", reply_markup=ADMIN_KB)
+        await state.clear()
 
-    await orm_add_product(session=session, data=data)
-
-    await state.clear()
+    except Exception as e:
+        await message.answer(
+            f"Ошибка: \n{str(e)}\nОбратитесь к програмеру, Он опять денег хочет", reply_markup=ADMIN_KB
+        )
+        await state.clear()
 
 @admin_router.message(AddProduct.image)
 async def add_image(message: types.Message, state: FSMContext):
